@@ -12,7 +12,7 @@ module.exports = {
     .catch(err => console.error(err))
   },
   byId: (req, res) => {
-    Station.find({_id: req.params.id})
+    Station.findOne({_id: req.params.id})
     .then(station => res.send(station))
     .catch(err => console.error(err))
   },

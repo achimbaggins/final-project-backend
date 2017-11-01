@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 const stationSchema = new Schema ({
   coordinate: [{type: String}],
-  stationName: String,
+  stationName: {
+    type: String,
+    required: true
+  },
   imageUrl: String,
   description: String
 },{
