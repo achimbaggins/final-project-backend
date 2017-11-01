@@ -242,4 +242,178 @@ describe('GET ALL STATIONS: ', () => {
     })
   })
 
+  it (`should return response.body.data[0]._id = ${newStation._id}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[0]._id.should.equal(newStation._id)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[0].coordinate = ${newStation.coordinate}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[0].coordinate.should.equal(newStation.coordinate)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[0].stationName = ${newStation.stationName}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[0].stationName.should.equal(newStation.stationName)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[0].imageUrl = ${newStation.imageUrl}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[0].imageUrl.should.equal(newStation.imageUrl)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[0].description = ${newStation.description}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[0].description.should.equal(newStation.description)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[1]._id = ${newStation2._id}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[1]._id.should.equal(newStation2._id)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[1].coordinate = ${newStation2.coordinate}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[1].coordinate.should.equal(newStation2.coordinate)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[1].stationName = ${newStation2.stationName}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[1].stationName.should.equal(newStation2.stationName)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[1].imageUrl = ${newStation2.imageUrl}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[1].imageUrl.should.equal(newStation2.imageUrl)
+      done()
+    })
+  })
+
+  it (`should return response.body.data[1].description = ${newStation2.description}`, (done) => {
+    chai.request(app)
+    .get(`/stations`)
+    .end((err, response) => {
+      response.body.data[1].description.should.equal(newStation2.description)
+      done()
+    })
+  })
+
+})
+
+describe('GET ONE STATION: ', () => {
+
+  beforeEach(done => {
+    Station.create(newStation)
+    .then(response => {
+      newStation._id = response._id
+      done()
+    })
+    .catch(err => console.log(err))
+  })
+
+  afterEach(done => {
+    Station.remove({
+      _id: newStation._id
+    })
+    .then(response => done())
+    .catch(err => console.log(err))
+  })
+
+  it ('should return response status = 200', (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.status.should.equal(200)
+      done()
+    })
+  })
+
+  it ('should return response.body.data as an "object"', (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data.should.be.an('object')
+      done()
+    })
+  })
+
+  it (`should return response.body.data._id = ${newStation._id}`, (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data._id.should.equal(newStation._id)
+      done()
+    })
+  })
+
+  it (`should return response.body.data.coordinate = ${newStation.coordinate}`, (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data.coordinate.should.equal(newStation.coordinate)
+      done()
+    })
+  })
+
+  it (`should return response.body.data.stationName = ${newStation.stationName}`, (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data.stationName.should.equal(newStation.stationName)
+      done()
+    })
+  })
+
+  it (`should return response.body.data.imageUrl = ${newStation.imageUrl}`, (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data.imageUrl.should.equal(newStation.imageUrl)
+      done()
+    })
+  })
+
+  it (`should return response.body.data.description = ${newStation.description}`, (done) => {
+    chai.request(app)
+    .get(`/stations/${newStation._id}`)
+    .end((err, response) => {
+      response.body.data.description.should.equal(newStation.description)
+      done()
+    })
+  })
+
 })
