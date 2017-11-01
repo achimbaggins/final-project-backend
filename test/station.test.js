@@ -1,5 +1,6 @@
 const chai = require('chai')
 const should = chai.should()
+const expect = chai.expect
 const chaiHttp = require('chai-http')
 const app = require('../app.js')
 const Station = require('../models/Station')
@@ -122,6 +123,45 @@ describe ('CREATE NEW STATION: ', () => {
     .end((err, response) => {
       response.body.errors.description.message.should.equal('Path `description` is required.')
       done()
+    })
+  })
+
+})
+
+var id_station_dummy = null
+
+describe('DELETE STATION: ', () => {
+
+  beforeEach(done => {
+    Station.create(newStation)
+    .then(response => {
+      id_station_dummy = response._id
+      done()
+    })
+    .catch(err => console.log(err))
+  })
+
+  it ('should return response status = 200', (done) => {
+    chai.request(app)
+    .delete(`/stations/${id_station_dummy}`)
+    .end((err, response) => {
+      response.status.should.equal(200)
+      done()
+    })
+  })
+
+  it ('expect response2.body to not have property "data"', (done) => {
+    chai.request(app)
+    .delete(`/stations/${id_station_dummy}`)
+    .end((err, response) => {
+
+      chai.request(app)
+      .get(`/stations/${id_station_dummy}`)
+      .end((err2, response2) => {
+        expect(response2.body).to.not.have.property('data');
+        done()
+      })
+
     })
   })
 
