@@ -21,6 +21,7 @@ describe('testing bus database', () => {
       res.body.should.have.property('_id')
       res.body.should.have.property('name')
       res.body.should.have.property('bus_code')
+      res.body.should.have.property('destination')
       res.body._id.should.be.a('String')
       res.body.name.should.be.a('String')
       res.body.bus_code.should.be.a('String')
@@ -52,6 +53,7 @@ describe('testing bus database', () => {
       res.body.should.have.property('_id')
       res.body.should.have.property('name')
       res.body.should.have.property('bus_code')
+      res.body.should.have.property('destination')
       res.body._id.should.be.a('String')
       res.body.name.should.be.a('String')
       res.body.bus_code.should.be.a('String')
@@ -68,6 +70,7 @@ describe('testing bus database', () => {
       res.should.not.have.property('_id')
       res.should.not.have.property('name')
       res.should.not.have.property('bus_code')
+      res.should.not.have.property('destination')
     })
   })
 
