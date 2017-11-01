@@ -1,13 +1,17 @@
 var app = require('express')();
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
+const mongoose = require('mongoose');
+// mongoose.connect('mongodb://achim:mQ8sOpOikNKXTjWt@cluster0-shard-00-00-j6d3u.mongodb.net:27017,cluster0-shard-00-01-j6d3u.mongodb.net:27017,cluster0-shard-00-02-j6d3u.mongodb.net:27017/backendfinalproject?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {useMongoClient: true})
+mongoose.connect('mongodb://localhost/final_anto')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+var index = require('./routes/index');
+var station = require('./routes/station');
+
 app.use('/', index);
-app.use('/users', users);
+app.use('/stations', station);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
