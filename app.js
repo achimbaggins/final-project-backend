@@ -1,11 +1,14 @@
 var app = require('express')();
 var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://achim:mQ8sOpOikNKXTjWt@cluster0-shard-00-00-j6d3u.mongodb.net:27017,cluster0-shard-00-01-j6d3u.mongodb.net:27017,cluster0-shard-00-02-j6d3u.mongodb.net:27017/backendfinalproject?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {useMongoClient: true})
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var index = require('./routes/index');
 var station = require('./routes/station');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
 app.use('/stations', station);
 
