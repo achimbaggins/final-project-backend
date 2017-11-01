@@ -8,9 +8,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var index = require('./routes/index');
 var station = require('./routes/station');
+var bus = require('./routes/bus');
+var position = require('./routes/position');
 
 app.use('/', index);
 app.use('/stations', station);
+app.use('/bus', bus);
+app.use('/position', position);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
