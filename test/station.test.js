@@ -21,7 +21,7 @@ var newStation2 = {
   description: 'dummy_station_2 description bla bla bla'
 }
 
-describe ('CREATE NEW STATION: ', () => {
+describe ('TESTING CREATE STATION DATA: ', () => {
 
   afterEach(done => {
     Station.remove({
@@ -147,7 +147,12 @@ describe ('CREATE NEW STATION: ', () => {
 
 })
 
-describe('DELETE STATION: ', () => {
+
+
+
+
+
+describe('TESTING DELETE STATION DATA: ', () => {
 
   beforeEach(done => {
     Station.create(newStation)
@@ -184,7 +189,12 @@ describe('DELETE STATION: ', () => {
 
 })
 
-describe('GET ALL STATIONS: ', () => {
+
+
+
+
+
+describe('TESTING GET ALL STATIONS DATA: ', () => {
 
   beforeEach(done => {
     Station.create(newStation)
@@ -321,7 +331,12 @@ describe('GET ALL STATIONS: ', () => {
 
 })
 
-describe('GET ONE STATION: ', () => {
+
+
+
+
+
+describe('TESTING GET ONE STATION DATA: ', () => {
 
   beforeEach(done => {
     Station.create(newStation)
@@ -392,6 +407,112 @@ describe('GET ONE STATION: ', () => {
     .end((err, response) => {
       response.body.description.should.equal(newStation.description)
       done()
+    })
+  })
+
+})
+
+
+
+
+
+
+describe('TESTING UPDATE STATION DATA: ', () => {
+
+  beforeEach(done => {
+    Station.create(newStation)
+    .then(response => {
+      newStation._id = response._id
+      done()
+    })
+    .catch(err => console.log(err))
+  })
+
+  afterEach(done => {
+    Station.remove({
+      _id: newStation._id
+    })
+    .then(response => done())
+    .catch(err => console.log(err))
+  })
+
+  it ('should return response status = 200', (done) => {
+    delete newStation2._id
+    chai.request(app)
+    .put(`/stations/${newStation._id}`)
+    .send(newStation2)
+    .end((err, response) => {
+      response.status.should.equal(200)
+      done()
+    })
+  })
+
+  it ('should return response2.body.coordinate = "[1,1]"', (done) => {
+    delete newStation2._id
+    chai.request(app)
+    .put(`/stations/${newStation._id}`)
+    .send(newStation2)
+    .end((err, response) => {
+
+      chai.request(app)
+      .get(`/stations/${newStation._id}`)
+      .end((err2, response2) => {
+        response2.body.coordinate[0].should.equal('1')
+        response2.body.coordinate[1].should.equal('1')
+        done()
+      })
+
+    })
+  })
+
+  it ('should return response2.body.stationName = "dummy_station_2"', (done) => {
+    delete newStation2._id
+    chai.request(app)
+    .put(`/stations/${newStation._id}`)
+    .send(newStation2)
+    .end((err, response) => {
+
+      chai.request(app)
+      .get(`/stations/${newStation._id}`)
+      .end((err2, response2) => {
+        response2.body.stationName.should.equal('dummy_station_2')
+        done()
+      })
+
+    })
+  })
+
+  it ('should return response2.body.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/c/cf/Harmoni_Central_Busway_Transjakarta_2.JPG"', (done) => {
+    delete newStation2._id
+    chai.request(app)
+    .put(`/stations/${newStation._id}`)
+    .send(newStation2)
+    .end((err, response) => {
+
+      chai.request(app)
+      .get(`/stations/${newStation._id}`)
+      .end((err2, response2) => {
+        response2.body.imageUrl.should.equal('https://upload.wikimedia.org/wikipedia/commons/c/cf/Harmoni_Central_Busway_Transjakarta_2.JPG')
+        done()
+      })
+
+    })
+  })
+
+  it ('should return response2.body.description = "dummy_station_2 description bla bla bla"', (done) => {
+    delete newStation2._id
+    chai.request(app)
+    .put(`/stations/${newStation._id}`)
+    .send(newStation2)
+    .end((err, response) => {
+
+      chai.request(app)
+      .get(`/stations/${newStation._id}`)
+      .end((err2, response2) => {
+        response2.body.description.should.equal('dummy_station_2 description bla bla bla')
+        done()
+      })
+
     })
   })
 
