@@ -29,7 +29,7 @@ describe('testing bus database', () => {
     })
   })
 
-  it('get bus data', function (done) => {
+  it('get bus data', (done) => {
     chai.request('http://localhost:3000')
     .get('/bus')
     .end((err, res) => {
@@ -38,7 +38,7 @@ describe('testing bus database', () => {
     })
   })
 
-  it('update bus data', function (done) => {
+  it('update bus data', (done) => {
     chai.request('http://localhost:3000')
     .put(`/bus/${id}`)
     .send({
@@ -60,7 +60,7 @@ describe('testing bus database', () => {
     })
   })
 
-  it('delete bus data' function (done) {
+  it('delete bus data', (done) => {
     chai.request('http://localhost:3000')
     .delete(`bus/${id}`)
     .end((err,res) => {
