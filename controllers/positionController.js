@@ -3,6 +3,8 @@ const Position = require('../models/Position');
 module.exports = {
   all: (req, res) => {
     Position.find()
+    .populate('bus_id')
+    .populate('station_id')
     .then(dataPosition => res.send(dataPosition))
     .catch(err => console.error(err))
   },

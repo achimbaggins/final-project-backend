@@ -3,6 +3,7 @@ const Bus = require('../models/Bus');
 module.exports = {
   all: (req, res) => {
     Bus.find()
+    .populate('destination')
     .then(dataBus => res.send(dataBus))
     .catch(err => console.error(err))
   },
@@ -12,7 +13,8 @@ module.exports = {
     .catch(err => console.error(err))
   },
   byId: (req, res) => {
-    Bus.find({_id: req.params.id})
+    Bus.findOne({_id: req.params.id})
+    .populate('destination')
     .then(station => res.send(station))
     .catch(err => console.error(err))
   },
