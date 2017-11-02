@@ -7,6 +7,19 @@ const Station = require('../models/Station')
 
 chai.use(chaiHttp)
 
+var newStation = {
+  lat: '0',
+  lng: '0',
+  stationName: 'dummy_station',
+  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Harmoni_Central_Busway_Transjakarta_1.JPG',
+  description: 'dummy_station description bla bla bla'
+}
+
+var newBus = {
+  name: 'testing bus name',
+  bus_code: 'testing bus code'
+}
+
 let id = null
 
 describe('TESTING (CREATE, READ, UPDATE, DELETE) POSITION DATA: ', () => {
@@ -15,19 +28,11 @@ describe('TESTING (CREATE, READ, UPDATE, DELETE) POSITION DATA: ', () => {
   let station_id = null
 
   beforeEach(done => {
-    Bus.create({
-      name: 'testing bus name',
-      bus_code: 'testing bus code'
-    })
+    Bus.create(newBus)
     .then(response => {
       bus_id = response._id
 
-      Station.create({
-        coordinate: [1,1],
-        stationName: 'dummy_station_2',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Harmoni_Central_Busway_Transjakarta_2.JPG',
-        description: 'dummy_station_2 description bla bla bla'
-      })
+      Station.create(newStation)
       .then(response => {
         station_id = response._id
         done()

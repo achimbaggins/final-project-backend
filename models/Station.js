@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const stationSchema = new Schema ({
-  coordinate: {
+  lat: {
+    type: String,
+    required: true
+  },
+  lng: {
     type: String,
     required: true
   },
